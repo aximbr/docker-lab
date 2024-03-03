@@ -64,6 +64,18 @@ def put_product(id):
 
     return f'Product with id {id} not found', 404
 
+# curl --request DELETE -v http://localhost:5000/product/2
+@app.route('/product/<int:id>', methods=['DELETE'])
+def delete_product(id):
+    """Delete a product based on id"""
+    # Find the product with specified id
+    product_list = [product for product in products if product['id'] == id]
+    if len(product_list) == 1:
+        products.remove(product_list[0])
+        return f'Product with id {id} deleted', 200
+
+    return f'Product with id {id} not found', 404
+
 
 #main()
 if __name__ == '__main__':
