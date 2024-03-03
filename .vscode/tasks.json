@@ -37,7 +37,7 @@
               "up": {
                 "detached": true,
                 "build": true,
-                "services": ["productservice"]
+                //"services": ["productservice", "web"]
               },
               "files": [
                 "${workspaceFolder}/docker-compose.yml",
