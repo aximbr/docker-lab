@@ -29,6 +29,28 @@
             "python": {
                 "file": "app.py"
                 }
+        },
+        {
+            "label": "Run docker-compose up",
+            "type": "docker-compose",
+            "dockerCompose": {
+              "up": {
+                "detached": true,
+                "build": true,
+                "services": ["productservice"]
+              },
+              "files": [
+                "${workspaceFolder}/docker-compose.yml",
+                //"${workspaceFolder}/docker-compose.debug.yml"
+              ]
+            }
+        },
+        {
+            "label": "Run docker-compose Down",
+            "type": "docker-compose",
+            "dockerCompose": {
+                "down": { }
+            }
         }
     ]
 }

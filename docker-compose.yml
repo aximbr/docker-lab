@@ -1,0 +1,8 @@
+# docker-compose.yml
+services:
+  productservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
