@@ -26,7 +26,7 @@ def get_product(id):
         return f"Product with id {id} not found", 404
     return jsonify(product_list[0])
 
-# curl --header "Content-Type: application/json" --request POST --data '{"name" : "Product3"}' -v http://localhost:5000/product
+# curl --header "Content-Type: application/json" --request POST --data '{"name" : "product3"}' -v http://localhost:5000/product
 @app.route('/product', methods=['POST'])
 def post_product():
     """Create a new product on database"""
@@ -47,6 +47,24 @@ def post_product():
 
     # Return the new product back to the client
     return jsonify(new_product), 201
+
+# curl --header "content-Type: application/json" --request PUT --data '{"name" : "Update product2"}' -v http://localhost:5000/product/2
+@app.route('/product/<int:id>', methods=['PUT'])
+def put_product(id):
+    """Update a product name based on id"""
+    # Get the request payload
+    update_product = request.json
+
+    #Find the product with the specified id
+    for product in products:
+        if product['id'] == id:
+            # Update product name
+            product['name'] = update_product['name']
+            return jsonify(product), 200
+
+    return f'Product with id {id} not found', 404
+
+
 #main()
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
