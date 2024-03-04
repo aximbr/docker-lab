@@ -49,7 +49,9 @@
             "label": "Run docker-compose Down",
             "type": "docker-compose",
             "dockerCompose": {
-                "down": { }
+                "down": { 
+                    "removeVolumes": true,
+                }
             }
         }
     ]
