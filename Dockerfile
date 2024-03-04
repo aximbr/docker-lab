@@ -1,5 +1,5 @@
 # set base image
-FROM python:3.10-slim-bullseye
+FROM python:latest
 
 # set the working directory in container
 WORKDIR /code

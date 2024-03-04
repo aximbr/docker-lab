@@ -13,5 +13,7 @@ services:
     command: "--init-file /data/application/init.sql --default-authentication-plugin=mysql_native_password"
     volumes:
       - "./db/init.sql:/data/application/init.sql"
+      # If you want persist your database uncomment line below, make sure write permission there
+      #- "/MyPersistFolder:/var/lib/mysql"
     environment:
       - MYSQL_ROOT_PASSWORD=password

@@ -11,14 +11,14 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@db/products'
 db.init_app(app)
 
-# curl -v http://localhost:5000/products
+# curl -v http://localhost/products
 @app.route("/products")
 def get_products():
     """This function create an endpoint to show all products on json format"""
     products = [product.json for product in Product.find_all()]
     return jsonify(products)
 
-# curl -v http://localhost:5000/product/1
+# curl -v http://localhost/product/1
 @app.route("/product/<int:prod_id>")
 def get_product(prod_id):
     """This function create an endpoint to show a product based on prod_id"""
@@ -27,7 +27,7 @@ def get_product(prod_id):
         return jsonify(product.json)
     return f"Product with prod_id {prod_id} not found", 404
 
-# curl --header "Content-Type: application/json" --request POST --data '{"name" : "product3"}' -v http://localhost:5000/product
+# curl --header "Content-Type: application/json" --request POST --data '{"name" : "product3"}' -v http://localhost/product
 @app.route('/product', methods=['POST'])
 def post_product():
     """Create a new product on database"""
@@ -43,7 +43,7 @@ def post_product():
     # Return the new product back to the client
     return jsonify(product.json), 201
 
-# curl --header "content-Type: application/json" --request PUT --data '{"name" : "Update product2"}' -v http://localhost:5000/product/2
+# curl --header "content-Type: application/json" --request PUT --data '{"name" : "Update product2"}' -v http://localhost/product/2
 @app.route('/product/<int:prod_id>', methods=['PUT'])
 def put_product(prod_id):
     """Update a product name based on prod_id"""
@@ -60,7 +60,7 @@ def put_product(prod_id):
         return jsonify(existing_product.json), 200
     return f'Product with prod_id {prod_id} not found', 404
 
-# curl --request DELETE -v http://localhost:5000/product/2
+# curl --request DELETE -v http://localhost/product/2
 @app.route('/product/<int:prod_id>', methods=['DELETE'])
 def delete_product(prod_id):
     """Delete a product based on prod_id"""
