@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - "./config:/config"
   web:
     build: ngnix
     ports:
@@ -14,6 +16,8 @@ services:
     volumes:
       - "./db/init.sql:/data/application/init.sql"
       # If you want persist your database uncomment line below, make sure write permission there
-      #- "/MyPersistFolder:/var/lib/mysql"
+      - "db-volume:/var/lib/mysql"
     environment:
       - MYSQL_ROOT_PASSWORD=password
+volumes:
+  db-volume:
