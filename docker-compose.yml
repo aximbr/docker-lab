@@ -1,4 +1,8 @@
 # docker-compose.yml
+secrets:
+  db_password:
+    file: db_password.txt
+
 services:
   productservice:
     build:
@@ -6,6 +10,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - "./config:/config"
+    secrets:
+      - db_password
   web:
     build: ngnix
     ports:
