@@ -6,6 +6,8 @@ import logging.config
 from flask import Flask, jsonify, request
 from sqlalchemy import exc
 import configparser
+import debugpy
+import os
 from db import db
 from Product import Product
 
@@ -15,6 +17,11 @@ logging.config.fileConfig("/config/logging.ini", disable_existing_loggers=False)
 #Get a logger from our module
 log = logging.getLogger(__name__)
 
+# Setup debugger
+debug = os.getenv('DEBUG', 'False')
+if debug == 'True':
+    debugpy.listen(("0.0.0.0", 5678))
+    log.info('Started debugger on port 5678')
 def get_database_url():
     # Load our database configuration
     config = configparser.ConfigParser()
@@ -134,4 +141,4 @@ def delete_product(prod_id):
 
 #main()
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
