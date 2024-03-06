@@ -4,16 +4,20 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-      {
-        "name": "Launch Python App in Docker",
-        "type": "docker",
-        "request": "launch",
-        "preLaunchTask": "docker-run: debug",
-        "removeContainerAfterDebug": true,
-        "python": {
-          "projectType": "general",
-          "justMyCode": true,
-          }
-      }
-      ]
+        {
+            "name": "Python: Remote Attach",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/src",
+                    "remoteRoot": "/code"
+                }
+            ]
+        }
+    ]
 }

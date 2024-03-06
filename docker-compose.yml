@@ -14,11 +14,16 @@ services:
       dockerfile: Dockerfile
     volumes:
       - "./config:/config"
+      - "./src:/code"
     secrets:
       - db_password
     networks:
       - frontend
       - backend
+    ports:
+      - "5678:5678"
+    environment:
+      - DEBUG=True
 
   web:
     build: ngnix
